@@ -71,17 +71,14 @@ router.get('/', function(req, res, next) {
 router.get('/baca/:id', async function(req, res, next) {  
 	var id = req.params.id; 
 	var nama = req.params.nama; 
-	const komentarrr = await Komen2s.findAll({where:{idberita1:id}});
 	const komentarr = await Komen1s.findAll({where:{idberita:id}});
-	await Komen1s.findByPk(nama)
 	await Berita.findByPk(id)
 	  .then(baca => {
 		  if(baca){
 			  res.render('baca', { 
 		  		title: 'Baca Berita',
 		  		berita: baca,
-				komen1s: komentarr,
-				komen2s: komentarrr
+				komen1s: komentarr
 		});
 		  }else{
 			  // http 404 not found
