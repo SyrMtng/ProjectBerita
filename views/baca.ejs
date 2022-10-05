@@ -1,0 +1,95 @@
+<%- include('templates/depan')-%>
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		<%= title %>
+	</title>
+	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+</head>
+
+<body>
+	<div class="container">
+		<br>
+		
+			<div class="p-5 mb-4 bg-light rounded-3">
+				<div>
+					<p><img src="../images/<%=berita.gambar %>" style="width:630px;height:360px;" class="rounded mx-auto d-block" alt="<%=berita.judul %>"></p>
+					<h1><%=berita.judul %></h1>
+					<p ><%=berita.isi %></p>
+				</div>
+					<br>
+				<div>
+				<div class="d-grid gap-2 col-6 mx-auto">
+					<a href="/berita" class="btn btn-outline-danger">
+						Kembali
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-circle" viewBox="0 0 16 16">
+							<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+							<path d="M11.729 5.055a.5.5 0 0 0-.52.038L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.271-.445z"/>
+						  </svg>
+					</a>
+				</div>
+				<form method="POST" action="/komen" class="mt-4">
+					<h3>Komentar</h3>
+					<div class="mb-3">
+					  <input type="hidden" name="idberita" value="<%= berita.id %>">
+					  <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" required />
+					</div>
+					<div class="mb-3">
+						<textarea name="isi" class="form-control" id="isi" placeholder="Isi Komnetar" required></textarea>
+					</div>
+					<button type="submit" class="btn btn-outline-primary">
+						Kirim
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-check" viewBox="0 0 16 16">
+							<path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.75.75 0 0 0-.124 1.329l4.995 3.178 1.531 2.406a.5.5 0 0 0 .844-.536L6.637 10.07l7.494-7.494-1.895 4.738a.5.5 0 1 0 .928.372l2.8-7Zm-2.54 1.183L5.93 9.363 1.591 6.602l11.833-4.733Z"/>
+							<path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
+						</svg>
+					</button>
+				</form>
+				&emsp;
+				<div class="card">
+					<div class="card-body">
+						<% komen1s.forEach(function(komen){ %>
+						<ul class="list-group">
+							<li class="list-group-item active" aria-current="true">
+								Dari: <%= komen.nama %>
+								<p>Berkomentar: <%= komen.isi %></p>
+							<form method="POST" action="" class="mt-4">
+								<div class="row g-3">
+									<div class="col-sm">
+										<input type="hidden" name="idberita1" value="<%= berita.id %>">
+										<input type="hidden" name="idkomen" value="<%= komen.nama %>">
+										<input type="text" name="nama1" class="form-control" id="nama1" placeholder="Nama" aria-label="State" required />
+									</div>
+									<div class="col-sm-7">
+										<input type="text" name="balas" class="form-control" id="balas" placeholder="Isi Balasan" aria-label="City" required />
+									</div>
+									<div class="col-sm">
+										<button type="submit" class="btn btn-dark">
+											Balas
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-check" viewBox="0 0 16 16">
+												<path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.75.75 0 0 0-.124 1.329l4.995 3.178 1.531 2.406a.5.5 0 0 0 .844-.536L6.637 10.07l7.494-7.494-1.895 4.738a.5.5 0 1 0 .928.372l2.8-7Zm-2.54 1.183L5.93 9.363 1.591 6.602l11.833-4.733Z"/>
+												<path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
+											</svg>
+										</button>
+									</div>
+								</div>
+							</form>
+							</li>
+							<li class="list-group-item">
+								Dari : 
+								<p>Membalas :</p>
+							</li>
+						</ul>&nbsp
+						<% }); %> 
+					</div>
+				</div>
+			</div>
+	</div>
+
+
+</body>
+
+</html>
+<%- include('templates/belakang')-%>
